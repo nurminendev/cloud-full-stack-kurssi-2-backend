@@ -47,7 +47,7 @@ logger.info(`Mongoose: Connected to ${dbHost}:${dbPort}/${dbName}`)
 //
 // Konfiguroi Express
 //
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 3000
 
 const app = express()
 

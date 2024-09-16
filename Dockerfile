@@ -44,6 +44,6 @@ WORKDIR /app
 
 COPY --from=builder --chown=node:node /app/tmp /app
 
-EXPOSE 4000
+EXPOSE 3000
 
 CMD ["node", "server.js"]
