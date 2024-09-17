@@ -10,6 +10,11 @@ import logger       from '../../logger.js'
 import Todo         from '../../models/todo.model.js'
 
 
+/*
+ * GET /api/todo 
+ *
+ * Palauttaa listan tietokannassa olevista Todo-riveistä
+ */
 export async function index(req, res) {
     logger.logRequest(req, 'todo/index')
 
@@ -17,8 +22,6 @@ export async function index(req, res) {
         const select = 'text'
 
         const todos = await Todo.find({}, select).lean().exec()
-
-        console.log(todos)
 
         return res.status(200).json(todos)
     } catch(error) {
@@ -28,6 +31,11 @@ export async function index(req, res) {
 }
 
 
+/*
+ * POST /api/todo 
+ *
+ * Luo uuden Todo-rivin tietokantaan
+ */
 export async function create(req, res) {
     logger.logRequest(req, 'todo/create')
 
@@ -49,6 +57,11 @@ export async function create(req, res) {
 }
 
 
+/*
+ * PATCH /api/todo/:id
+ *
+ * Päivittää olemassaolevan Todo-rivin tekstin tietokannassa
+ */
 export async function patch(req, res) {
     logger.logRequest(req, 'todo/patch')
 
@@ -92,6 +105,11 @@ export async function patch(req, res) {
 }
 
 
+/*
+ * DELETE /api/todo/:id
+ *
+ * Poistaa Todo-rivin tietokannasta
+ */
 export async function destroy(req, res) {
     logger.logRequest(req, 'todo/destroy')
 
