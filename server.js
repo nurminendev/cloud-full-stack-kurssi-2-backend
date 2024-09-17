@@ -10,6 +10,7 @@ import './dotenv.js'
 import express        from 'express'
 import mongoose       from 'mongoose'
 import cors           from 'cors'
+import nocache        from 'nocache'
 
 import apiRoutes      from './api/index.js'
 
@@ -50,6 +51,14 @@ logger.info(`Mongoose: Connected to ${dbHost}:${dbPort}/${dbName}`)
 const port = process.env.PORT || 4000
 
 const app = express()
+
+// Poista mm. Cloudflaren välimuisti käytöstä esimerkkisovelluksen resursseilta, jotta pystymme 
+// testaamaan koodimuutoksia. Oikeassa sovelluksessa poista tämä ja tutustu "HTTP caching" sekä
+// "cloudflare caching" konsepteihin (jos Cloudflare käytössä)
+// Yksi esimerkki toteutuksesta on "bundlata" frontend esimerkiksi webpackillä ja luoda resursseihin
+// "content hash", eli tiedostonimen perään tiedoston sisällön mukaan muuttuva rimpsu (styles-jf83jfc89923.css)
+// josta esimerkiksi Cloudflare tietää, että tiedosto on muuttunut, ja hakee uuden tiedoston välimuistiin
+app.use(nocache())
 
 app.use(cors())
 app.use(express.json())
