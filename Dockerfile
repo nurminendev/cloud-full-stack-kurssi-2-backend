@@ -8,7 +8,7 @@
 # ------------------
 # package.json cache
 # ------------------
-FROM node:20.17.0-bookworm-slim AS deps
+FROM node:20.17.0-slim AS deps
 
 WORKDIR /tmp
 
@@ -18,7 +18,7 @@ COPY package.json ./
 # ---------------------
 # Builder
 # ---------------------
-FROM node:20.17.0-bookworm-slim AS builder
+FROM node:20.17.0-slim AS builder
 
 WORKDIR /app/tmp
 
@@ -33,7 +33,7 @@ COPY . /app/tmp
 # ---------------------
 # Final image
 # ---------------------
-FROM node:20.17.0-bookworm-slim AS web
+FROM node:20.17.0-slim AS web
 
 ARG NODE_ENV=production
 ENV NODE_ENV=$NODE_ENV
